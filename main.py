@@ -7,6 +7,7 @@ from threading import Thread
 import RPi.GPIO as g
 import time
 lapCount = 3
+#
 class CarController:
     def __init__(self, left_sensor, right_sensor, front_sensor,ir_sensor, rgb_sensor, motor, servo):
         self.left_sensor = left_sensor
