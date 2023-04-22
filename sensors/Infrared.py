@@ -1,6 +1,5 @@
 import RPi.GPIO as GPIO
 import time
-#set en mode norme gpio != board
 GPIO.setmode(GPIO.BCM)
 class Infrared:
     def __init__(self,pin) :
