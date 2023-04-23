@@ -28,7 +28,7 @@ class CarController:
             right_dist = self.right_sensor.distance()
             front_dist = self.front_sensor.distance()
             
-            left_error =  left_dist - 20 
+            left_error =  left_dist - 20 # 20 cm on each side, feel free to change this
             right_error = right_dist - 20
 
             if not self.started:
@@ -42,12 +42,12 @@ class CarController:
                     continue
 
             if front_dist < 20: 
-                self.kp = 5  # steering angle multiplicator when close to an turn
-                target_speed = 25
+                self.kp = 5  # steering angle multiplicator when close to an obstacle
+                target_speed = 25 # slowing the car down as well, to counter inertia
             else:
                 self.kp = 2 # steering angle multiplicator in normal situation
-                target_speed = 35
-            steering_angle = int(self.kp * (left_error - right_error))
+                target_speed = 35 # speed in normal situation
+            steering_angle = int(self.kp * (left_error - right_error)) 
 
             # Adjust the servo position based on the steering angle
             current_position = 127 + steering_angle
@@ -58,7 +58,7 @@ class CarController:
             self.speed_error = target_speed - self.speed
             self.speed += self.speed_error / 10  # Adjust speed gradually
 
-            self.motor.setSpeed(int(self.speed))
+            self.motor.forwardWithSpeed(int(self.speed))
 
 
 g.cleanup() # Clean up GPIO pins
